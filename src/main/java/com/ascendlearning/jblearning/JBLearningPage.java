@@ -6,6 +6,7 @@ import com.ascendlearning.automation.ui.config.PropertiesRepository;
 import com.ascendlearning.automation.ui.exceptions.DriverException;
 import com.ascendlearning.automation.ui.handlers.ButtonHandler;
 import com.ascendlearning.automation.ui.handlers.LinkHandler;
+import com.ascendlearning.automation.ui.handlers.MenuHandler;
 import com.ascendlearning.automation.ui.handlers.TextHandler;
 import com.ascendlearning.automation.ui.page.BasePage;
 
@@ -64,6 +65,36 @@ public class JBLearningPage extends BasePage{
 		
 		return this;
 		
+	}
+	
+	public JBLearningPage hoverOverSubjectDropDown() throws Exception{
+		MenuHandler menuHandler = new MenuHandler(driver);
+		menuHandler.hoverOverMenuItem(PropertiesRepository.getString("jblearning.mainpage.menu.subject.dropdown"));
+		
+		return this;
+	}
+	
+	public JBLearningPage hoverOverSubjectCategory(String selector) throws Exception{
+		MenuHandler menuHandler = new MenuHandler(driver);
+		menuHandler.hoverOverMenuItem(selector);
+		
+		return this;
+	}
+	
+	public JBLCatalogPage selectTopic(String topic) throws Exception{
+		String categoryPos=PropertiesRepository.getString(topic+".category");
+		String subCategoryPos=PropertiesRepository.getString(topic+".subcategory");
+		String subTopicPos=PropertiesRepository.getString(topic+".topic");
+		
+		hoverOverSubjectDropDown();
+		hoverOverSubjectCategory(PropertiesRepository.getString("jblearning.mainpage.menu.subject.category").replace("subjectCategoryPos", categoryPos));
+		hoverOverSubjectCategory(PropertiesRepository.getString("jblearning.mainpage.menu.subject.subcategory").replace("subjectCategoryPos", categoryPos).replace("subjectSubCategoryPos", subCategoryPos));
+		
+		MenuHandler menuHandler = new MenuHandler(driver);
+		menuHandler.selectMenuItem(PropertiesRepository.getString("jblearning.mainpage.menu.subject.topic").replace("subjectCategoryPos", categoryPos).replace("subjectSubCategoryPos", subCategoryPos).replace("topicPos", subTopicPos),
+				PropertiesRepository.getString("jblearning.mainpage.menu.topic.waitfor"));
+		
+		return new JBLCatalogPage(driver);
 	}
 
 }
