@@ -47,11 +47,8 @@ public class JBLearningPage extends BasePage{
 	}
 	
 	public JBLProductsPage doValidLogin(String userName) throws Exception{
-		enterUserName(userName);
-		enterPassword(getPassword(userName));
-		clickLoginButton();
+		return doValidLogin(userName, getPassword(userName));
 		
-		return new JBLProductsPage(driver);
 	}
 
 	private String getPassword(String userName) {
@@ -67,6 +64,12 @@ public class JBLearningPage extends BasePage{
 		
 	}
 	
+	
+	/**
+	 * This method will hover mouse over the subject dropdown element
+	 * @return
+	 * @throws Exception
+	 */
 	public JBLearningPage hoverOverSubjectDropDown() throws Exception{
 		MenuHandler menuHandler = new MenuHandler(driver);
 		menuHandler.hoverOverMenuItem(PropertiesRepository.getString("jblearning.mainpage.menu.subject.dropdown"));
@@ -81,6 +84,13 @@ public class JBLearningPage extends BasePage{
 		return this;
 	}
 	
+	
+	/**
+	 * This method will navigate through the menus and click the topic
+	 * @param topic
+	 * @return
+	 * @throws Exception
+	 */
 	public JBLCatalogPage selectTopic(String topic) throws Exception{
 		String categoryPos=PropertiesRepository.getString(topic+".category");
 		String subCategoryPos=PropertiesRepository.getString(topic+".subcategory");
@@ -95,6 +105,16 @@ public class JBLearningPage extends BasePage{
 				PropertiesRepository.getString("jblearning.mainpage.menu.topic.waitfor"));
 		
 		return new JBLCatalogPage(driver);
+	}
+
+	public JBLProductsPage doValidLogin(String userName, String password) throws Exception {
+
+		enterUserName(userName);
+		enterPassword(password);
+		clickLoginButton();
+		
+		return new JBLProductsPage(driver);
+	
 	}
 
 }
