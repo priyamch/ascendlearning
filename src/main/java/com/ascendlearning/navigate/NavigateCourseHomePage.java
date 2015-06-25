@@ -9,6 +9,7 @@ import com.ascendlearning.automation.ui.handlers.MenuHandler;
 import com.ascendlearning.automation.ui.handlers.TextHandler;
 import com.ascendlearning.automation.ui.handlers.WindowHandler;
 import com.ascendlearning.automation.ui.page.BasePage;
+import com.ascendlearning.excelsoft.SarasAssessmentPage;
 
 public class NavigateCourseHomePage extends BasePage{
 
@@ -95,5 +96,25 @@ public class NavigateCourseHomePage extends BasePage{
 	public boolean isReviewAssessmentLinkDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
 		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.testprep.reviewassessment")).isDisplayed();
+	}
+	
+	public NavigateCourseHomePage expandSection(String sectionPos) throws Exception{
+		LinkHandler linkHandler = new LinkHandler(driver);
+		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.chaptersection").replace("sectionPos", sectionPos));
+		
+		return this;
+	}
+	
+	public void clickEBook() throws Exception{
+		LinkHandler linkHandler = new LinkHandler(driver);
+		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ebook"));
+		
+	}
+
+	public SarasAssessmentPage launchChapter1PracticeActivity() throws Exception {
+		LinkHandler linkHandler = new LinkHandler(driver);
+		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice"));
+		
+		return new SarasAssessmentPage(driver);
 	}
 }

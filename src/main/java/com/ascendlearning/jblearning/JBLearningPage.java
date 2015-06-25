@@ -56,8 +56,8 @@ public class JBLearningPage extends BasePage{
 		return "changeme";
 	}
 
-	public JBLearningPage loadMainPage() {
-		driver.get(PropertiesRepository.getString("jblearning.mainpage.url"));
+	public JBLearningPage loadMainPage(String urlKey) {
+		driver.get(PropertiesRepository.getString(urlKey));
 		setDriverWait(PropertiesRepository.getString("jblearning.mainpage.url.waitfor"));
 		
 		return this;

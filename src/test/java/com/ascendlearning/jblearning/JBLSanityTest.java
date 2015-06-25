@@ -7,27 +7,33 @@ import com.ascendlearning.automation.ui.assertions.VerificationHandler;
 import com.ascendlearning.automation.ui.config.PropertiesRepository;
 import com.ascendlearning.automation.ui.handlers.WindowHandler;
 import com.ascendlearning.automation.ui.test.BaseTest;
+import com.ascendlearning.excelsoft.SarasAssessmentPage;
 import com.ascendlearning.navigate.NavigateCourseHomePage;
 
-public class DemoTest extends BaseTest{
+public class JBLSanityTest extends BaseTest{
 
 	private String userName="qainstructor26@jblearning.com";
 	private String productId="6709616d-647f-45f3-92f8-24d9c7f1ca78";
-	String customer="jblplatformqa";
 
+
+	String customer="jblplatformqa";
 	private String nav1CourseCode="24bc7880-4e05-4bdd-92a1-6ceaf8fea799";
 	private String nav2CourseCode="720d68e7-d769-4086-ad1b-84125f075e61";
 	private String testPrepCourseCode="94fb84ff-b7e3-4d9d-8e30-fb0f806f7b7a";
+	private String companionCourseCode="6e956d78-fc09-4cb2-8776-cbbe6a956647";
+	private String courseId="1E4953";
+	private String assessment="ch1practice";
 
 	@Test
 	public void test_ProductCheckOutFlow() throws Exception{
 		
 		JBLearningPage jblPage=new JBLearningPage(driver);
 		
-		JBLCheckoutOptionsPage jblCheckOutPage = jblPage.loadMainPage()
+		JBLCheckoutOptionsPage jblCheckOutPage = jblPage.loadMainPage("jblearning.prod.url")
 		.closeWidget()
 		.hoverOverSubjectDropDown()
-		.selectTopic("Corrections").clickProductName("9781284020212")
+		.selectTopic("Corrections")
+		.clickProductName("9781284020212")
 		.clickAddToCart()
 		.clickCheckOutButton()
 		.signInAsReturningUser(PropertiesRepository.getString(customer+".info.email"), "password")
@@ -46,7 +52,7 @@ public class DemoTest extends BaseTest{
 		
 		JBLearningPage jblPage=new JBLearningPage(driver);
 
-		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage()
+		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage("jblearning.prod.url")
 		.closeWidget()
 		.doValidLogin(PropertiesRepository.getString(customer+".info.email"), "password")
 		.clickProductNameLink(nav1CourseCode)
@@ -66,7 +72,7 @@ public class DemoTest extends BaseTest{
 	public void test_VerifyNav2Access() throws Exception{
 		JBLearningPage jblPage=new JBLearningPage(driver);
 
-		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage()
+		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage("jblearning.prod.url")
 		.closeWidget()
 		.doValidLogin(PropertiesRepository.getString(customer+".info.email"), "password")
 		.clickProductNameLink(nav2CourseCode)
@@ -80,10 +86,10 @@ public class DemoTest extends BaseTest{
 	
 	
 	@Test
-	public void test_VerifyTestPrepAccess() throws Exception{
+	public void test_VerifyTestPrepOpenEnroll() throws Exception{
 		JBLearningPage jblPage=new JBLearningPage(driver);
 
-		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage()
+		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage("jblearning.prod.url")
 		.closeWidget()
 		.doValidLogin(PropertiesRepository.getString(customer+".info.email"), "password")
 		.clickProductNameLink(testPrepCourseCode)
@@ -94,5 +100,45 @@ public class DemoTest extends BaseTest{
 		Assert.assertTrue(navCourseHomePage.isCompleteAssessmentLinkDisplayed(), "Complete assessment not displayed");
 		Assert.assertTrue(navCourseHomePage.isReviewAssessmentLinkDisplayed(), "Review assessment not displayed");
 		
+	}
+	
+	
+	@Test
+	public void test_VerifyEBookOpenEnroll() throws Exception{
+		JBLearningPage jblPage=new JBLearningPage(driver);
+
+		NavigateCourseHomePage navCourseHomePage = jblPage.loadMainPage("jblearning.prod.url")
+		.closeWidget()
+		.doValidLogin(PropertiesRepository.getString(customer+".info.email"), "password")
+		.clickProductNameLink(nav2CourseCode)
+		.clickLaunchOpenEnrolCourseButton();
+		
+		Assert.assertTrue(navCourseHomePage.isLessonsPathwayTabDisplayed(), "Lessons PATHWAY tab not displayed");
+		Assert.assertTrue(navCourseHomePage.isLearningPathwayTabDisplayed(), "Learning PATHWAY tab not displayed");
+		//Assert.assertTrue(navCourseHomePage.isTeachingPathwayTabDisplayed(), "Teaching PATHWAY tab not displayed");
+		
+		navCourseHomePage.expandSection("1").clickEBook();
+		
+	}
+	
+	
+	@Test
+	public void test_VerifyAssessment() throws Exception{
+		JBLearningPage jblPage=new JBLearningPage(driver);
+
+		SarasAssessmentPage sarasPage = jblPage.loadMainPage("jblearning.staging.url")
+		.closeWidget()
+		.doValidLogin(userName)
+		.clickProductNameLink(productId)
+		.clickLaunchCourseButton()
+		.expandSection("1")
+		.launchChapter1PracticeActivity()
+		.clickStartAssessmentLink()
+		.answerAllQuestions(courseId, assessment)
+		.submitAssessment()
+		.confirmSubmitAssessment();
+		
+		Assert.assertEquals(sarasPage.getSubmitCOnfirmationMessage(), "Congratulations");
+
 	}
 }
