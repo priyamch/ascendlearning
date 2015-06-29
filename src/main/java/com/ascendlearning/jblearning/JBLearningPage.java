@@ -116,5 +116,30 @@ public class JBLearningPage extends BasePage{
 		return new JBLProductsPage(driver);
 	
 	}
+	
+	public boolean isTechSupportLinkVisible(){
+		TextHandler textHandler = new TextHandler(driver);
+		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.mainpage.techsupport")).isDisplayed();
+	}
+	
+	public boolean isAboutUsLinkVisible(){
+		TextHandler textHandler = new TextHandler(driver);
+		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.mainpage.aboutus")).isDisplayed();
+	}
+	
+	public boolean isMyAccountLinkVisible(){
+		TextHandler textHandler = new TextHandler(driver);
+		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.mainpage.myaccount")).isDisplayed();
+	}
+	
+	public boolean isShoppingCartLinkVisible(){
+		TextHandler textHandler = new TextHandler(driver);
+		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.mainpage.shopcart")).isDisplayed();
+	}
+	
+	public boolean isRedeemCodeLinkVisible(){
+		TextHandler textHandler = new TextHandler(driver);
+		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.mainpage.redeemcode")).isDisplayed();
+	}
 
 }

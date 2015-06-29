@@ -41,7 +41,7 @@ public class SarasAssessmentPage extends BasePage{
 	 */
 	public SarasAssessmentPage enterAnswerText(String itemId, String answer) throws Exception{
 		TextHandler textHandler = new TextHandler(driver);
-		textHandler.writeText(PropertiesRepository.getString("jblearning.navigate.assessment.anstext").replace("itemId", itemId), getAnswerText(itemId));
+		textHandler.writeText(PropertiesRepository.getString("jblearning.navigate.assessment.anstext").replace("itemId", itemId), answer);
 		return this;
 	}
 
