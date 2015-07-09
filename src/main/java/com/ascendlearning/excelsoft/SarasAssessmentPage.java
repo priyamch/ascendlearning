@@ -115,7 +115,7 @@ public class SarasAssessmentPage extends BasePage{
 		return this;
 	}
 	
-	public String getSubmitCOnfirmationMessage(){
+	public String getSubmitCOnfirmationMessage() throws Exception{
 		
 		TextHandler textHandler = new TextHandler(driver);
 		return textHandler.getText(PropertiesRepository.getString("jblearning.navigate.assessment.submit.congrats"));

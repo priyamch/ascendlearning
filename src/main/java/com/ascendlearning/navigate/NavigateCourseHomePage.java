@@ -19,17 +19,17 @@ public class NavigateCourseHomePage extends BasePage{
 		winHandler.switchToLatestWindow(PropertiesRepository.getString("jblearning.navigate.headerlogo"));
 	}
 
-	public boolean isLessonsPathwayTabDisplayed(){
+	public boolean isLessonsPathwayTabDisplayed() throws Exception{
 		MenuHandler menuHandler = new MenuHandler(driver);
 		return menuHandler.getMenuItem(PropertiesRepository.getString("jblearning.navigate.menu.lessonspathway")).isDisplayed();
 	}
 	
-	public boolean isLearningPathwayTabDisplayed(){
+	public boolean isLearningPathwayTabDisplayed() throws Exception{
 		MenuHandler menuHandler = new MenuHandler(driver);
 		return menuHandler.getMenuItem(PropertiesRepository.getString("jblearning.navigate.menu.learningpathway")).isDisplayed();
 	}
 	
-	public boolean isTeachingPathwayTabDisplayed(){
+	public boolean isTeachingPathwayTabDisplayed() throws Exception{
 		MenuHandler menuHandler = new MenuHandler(driver);
 		return menuHandler.getMenuItem(PropertiesRepository.getString("jblearning.navigate.menu.teachingpathway")).isDisplayed();
 	}
@@ -44,58 +44,58 @@ public class NavigateCourseHomePage extends BasePage{
 	
 	public boolean isPeopleBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.peopleblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.peopleblock")).isDisplayed();
 	}
 	
 	public boolean isActivitiesBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.activitiesblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.activitiesblock")).isDisplayed();
 	}
 	
 	public boolean isAdministrationBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.administrationblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.administrationblock")).isDisplayed();
 	}
 	
 	public boolean isSearchForumsBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.searchforumblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.searchforumblock")).isDisplayed();
 	}
 	
 	public boolean isMessagesBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.messagesblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.messagesblock")).isDisplayed();
 	}
 	
 	public boolean isUpcomingEventsBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.eventsblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.eventsblock")).isDisplayed();
 	}
 	
 	public boolean isCalendarBlockDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.navigate1.calendarblock")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.navigate1.calendarblock")).isDisplayed();
 	}
 	
 	public boolean isCreateTestLinkDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.testprep.createpractice")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.testprep.createpractice")).isDisplayed();
 	}
 	
 	public boolean isReviewTestLinkDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.testprep.reviewpractice")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.testprep.reviewpractice")).isDisplayed();
 	}
 	
 	public boolean isCompleteAssessmentLinkDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.testprep.completeassessment")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.testprep.completeassessment")).isDisplayed();
 	}
 	
 	
 	public boolean isReviewAssessmentLinkDisplayed(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("jblearning.testprep.reviewassessment")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("jblearning.testprep.reviewassessment")).isDisplayed();
 	}
 	
 	public NavigateCourseHomePage expandSection(String sectionPos) throws Exception{
@@ -113,7 +113,7 @@ public class NavigateCourseHomePage extends BasePage{
 
 	public SarasAssessmentPage launchChapter1PracticeActivity(String practiceActivityId) throws Exception {
 		LinkHandler linkHandler = new LinkHandler(driver);
-		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice").replace("practiceActivityId", practiceActivityId));
+		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice").replace("practiceActivityId", practiceActivityId),PropertiesRepository.getString("jblearning.navigate.assessment.startbtn"));
 		
 		return new SarasAssessmentPage(driver);
 	}

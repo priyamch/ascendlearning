@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ascendlearning.automation.ui.config.PropertiesRepository;
+import com.ascendlearning.automation.ui.exceptions.DriverException;
 import com.ascendlearning.automation.ui.handlers.DropDownHandler;
 import com.ascendlearning.automation.ui.handlers.LinkHandler;
 import com.ascendlearning.automation.ui.handlers.TextHandler;
@@ -244,7 +245,7 @@ public class JBLCheckoutOptionsPage extends BasePage{
 
 	}
 	
-	public String getCustNameFromOrderConfirmation(){
+	public String getCustNameFromOrderConfirmation() throws DriverException{
 		
 		TextHandler textHandler = new TextHandler(driver);
 		return textHandler.getText(PropertiesRepository.getString("jblearning.checkout.orderconfirm.custname"));

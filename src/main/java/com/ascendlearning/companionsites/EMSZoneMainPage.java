@@ -43,7 +43,7 @@ public class EMSZoneMainPage extends BasePage{
 	public boolean isFreeSubjectDisplayed(String subjectRef) throws Exception{
 		
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("emszone.free.subject").replace("subjectRef", subjectRef)).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("emszone.free.subject").replace("subjectRef", subjectRef)).isDisplayed();
 		
 	}
 	
@@ -90,13 +90,13 @@ public class EMSZoneMainPage extends BasePage{
 	
 	public boolean isMp3OptionAvailable(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("ems.special.mp3")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("ems.special.mp3")).isDisplayed();
 		
 	}
 	
 	public boolean isMovOptionAvailable(){
 		TextHandler textHandler = new TextHandler(driver);
-		return textHandler.getTextelement(PropertiesRepository.getString("ems.special.mov")).isDisplayed();
+		return textHandler.getTextElement(PropertiesRepository.getString("ems.special.mov")).isDisplayed();
 		
 	}
 }
