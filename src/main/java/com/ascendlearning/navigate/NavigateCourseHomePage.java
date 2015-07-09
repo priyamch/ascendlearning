@@ -111,9 +111,9 @@ public class NavigateCourseHomePage extends BasePage{
 		
 	}
 
-	public SarasAssessmentPage launchChapter1PracticeActivity() throws Exception {
+	public SarasAssessmentPage launchChapter1PracticeActivity(String practiceActivityId) throws Exception {
 		LinkHandler linkHandler = new LinkHandler(driver);
-		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice"));
+		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice").replace("practiceActivityId", practiceActivityId));
 		
 		return new SarasAssessmentPage(driver);
 	}
