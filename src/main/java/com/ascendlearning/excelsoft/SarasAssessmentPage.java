@@ -1,5 +1,6 @@
 package com.ascendlearning.excelsoft;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.ascendlearning.automation.ui.config.PropertiesRepository;
@@ -12,6 +13,7 @@ import com.ascendlearning.automation.ui.page.BasePage;
 
 public class SarasAssessmentPage extends BasePage{
 
+	Logger log = Logger.getLogger(SarasAssessmentPage.class);
 	public SarasAssessmentPage(WebDriver webDriver) {
 		super(webDriver);
 		WindowHandler winHandler = new WindowHandler(driver);
@@ -40,6 +42,7 @@ public class SarasAssessmentPage extends BasePage{
 	 * @throws Exception
 	 */
 	public SarasAssessmentPage enterAnswerText(String itemId, String answer) throws Exception{
+		log.info("Entering answer text for: "+itemId+" -> "+answer);
 		TextHandler textHandler = new TextHandler(driver);
 		textHandler.writeText(PropertiesRepository.getString("jblearning.navigate.assessment.anstext").replace("itemId", itemId), answer);
 		return this;
@@ -150,6 +153,12 @@ public class SarasAssessmentPage extends BasePage{
 				break;
 			case "multiChoice":
 				selectOption(itemId, answer);
+				break;
+			case "matchOptionsTODO":
+				//TODO
+				break;
+			case"fillMultiBlanks":
+				//TODO
 				break;
 				
 			default:

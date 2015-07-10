@@ -16,7 +16,7 @@ public class NavigateCourseHomePage extends BasePage{
 	public NavigateCourseHomePage(WebDriver webDriver) {
 		super(webDriver);
 		WindowHandler winHandler = new WindowHandler(driver);
-		winHandler.switchToLatestWindow(PropertiesRepository.getString("jblearning.navigate.headerlogo"));
+		winHandler.switchToLatestWindow();
 	}
 
 	public boolean isLessonsPathwayTabDisplayed() throws Exception{
@@ -113,7 +113,7 @@ public class NavigateCourseHomePage extends BasePage{
 
 	public SarasAssessmentPage launchChapter1PracticeActivity(String practiceActivityId) throws Exception {
 		LinkHandler linkHandler = new LinkHandler(driver);
-		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice").replace("practiceActivityId", practiceActivityId),PropertiesRepository.getString("jblearning.navigate.assessment.startbtn"));
+		linkHandler.selectLink(PropertiesRepository.getString("jblearning.navigate.ch1practice").replace("practiceActivityId", practiceActivityId));
 		
 		return new SarasAssessmentPage(driver);
 	}

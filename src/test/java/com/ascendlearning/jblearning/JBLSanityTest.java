@@ -28,7 +28,7 @@ public class JBLSanityTest extends JBLBaseTest{
 	private String testPrepCourseCode="94fb84ff-b7e3-4d9d-8e30-fb0f806f7b7a";
 	private String companionCourseCode="6e956d78-fc09-4cb2-8776-cbbe6a956647";
 	private String practiceActivityId="19818";
-	private String courseId="1E4953";
+	private String courseId="EMCOpen";
 	private String assessment="ch1practice";
 	private String launchUrl;
 	private String loginReqdMsg="You must login in order to view this page.";
@@ -193,7 +193,7 @@ public class JBLSanityTest extends JBLBaseTest{
 		emsPage.doEMSLogin(PropertiesRepository.getString(customer+".info.email"), "password");
 		
 		emsPage.clickCloseFrame();
-		emsPage.clickSpecialPrivilageItem("audio");
+		
 		
 		Assert.assertTrue(emsPage.isMp3OptionAvailable(),"MP3 option not available");
 		Assert.assertTrue(emsPage.isMovOptionAvailable(),"Mov option not available");

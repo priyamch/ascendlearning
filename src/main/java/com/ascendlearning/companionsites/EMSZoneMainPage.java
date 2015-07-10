@@ -76,7 +76,7 @@ public class EMSZoneMainPage extends BasePage{
 	
 	public void clickCloseFrame() throws Exception{
 		ButtonHandler btnHandler = new ButtonHandler(driver);
-		btnHandler.clickButton(PropertiesRepository.getString("emszone.loginframe.close"));
+		btnHandler.clickButton(PropertiesRepository.getString("ems.loginframe.close"));
 	}
 	
 	public void doEMSLogin(String userName, String password) throws Exception{
