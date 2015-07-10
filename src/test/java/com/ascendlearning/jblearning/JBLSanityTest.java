@@ -27,7 +27,7 @@ public class JBLSanityTest extends JBLBaseTest{
 	private String nav2CourseCode="720d68e7-d769-4086-ad1b-84125f075e61";
 	private String testPrepCourseCode="94fb84ff-b7e3-4d9d-8e30-fb0f806f7b7a";
 	private String companionCourseCode="6e956d78-fc09-4cb2-8776-cbbe6a956647";
-	private String practiceActivityId="19818";
+	private String practiceActivityId="19826";
 	private String courseId="EMCOpen";
 	private String assessment="ch1practice";
 	private String launchUrl;
@@ -140,7 +140,7 @@ public class JBLSanityTest extends JBLBaseTest{
 				.doValidLogin(PropertiesRepository.getString(customer+".info.email"), "password")
 				.clickProductNameLink(nav2CourseCode)
 				.clickLaunchOpenEnrolCourseButton()
-				.expandSection("1")
+				.expandSection("2")
 				.launchChapter1PracticeActivity(practiceActivityId)
 				.clickStartAssessmentLink();
 				/*Assignment questions order is random
