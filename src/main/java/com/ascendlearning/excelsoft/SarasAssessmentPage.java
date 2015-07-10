@@ -1,7 +1,12 @@
 package com.ascendlearning.excelsoft;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.ascendlearning.automation.ui.config.PropertiesRepository;
 import com.ascendlearning.automation.ui.exceptions.DriverException;
@@ -14,10 +19,12 @@ import com.ascendlearning.automation.ui.page.BasePage;
 public class SarasAssessmentPage extends BasePage{
 
 	Logger log = Logger.getLogger(SarasAssessmentPage.class);
+	private List<String> itemIdList;
 	public SarasAssessmentPage(WebDriver webDriver) {
 		super(webDriver);
 		WindowHandler winHandler = new WindowHandler(driver);
 		winHandler.switchToLatestWindow(PropertiesRepository.getString("jblearning.navigate.assessment.startbtn"));
+		setItemList();
 	}
 
 	public SarasAssessmentPage clickStartAssessmentLink() throws Exception{
@@ -133,16 +140,17 @@ public class SarasAssessmentPage extends BasePage{
 	 * @param assessment
 	 * @throws Exception
 	 */
-	public SarasAssessmentPage answerAllQuestions(String courseId, String assessment) throws Exception{
-		String propKeyPrefix = courseId+"."+assessment;
-		int totalQs = PropertiesRepository.getInt(propKeyPrefix+".totalquestions");
-		String itemId=null;
+	public SarasAssessmentPage answerAllQuestions() throws Exception{
+		
+		
+		int q=1;
 		String questionType=null;
 		String answer=null;
-		for(int q=1;q<=totalQs;q++){
-			itemId=PropertiesRepository.getString(propKeyPrefix+".question"+q+".itemId");
-			questionType=PropertiesRepository.getString(propKeyPrefix+".question"+q+".qtype");
-			answer=PropertiesRepository.getString(propKeyPrefix+".question"+q+".answer");
+		for(String itemId: itemIdList){
+			log.info("Answering for Question number: "+q);
+//			itemId=PropertiesRepository.getString(propKeyPrefix+".question"+q+".itemId");
+			questionType=PropertiesRepository.getString(itemId+".qtype");
+			answer=PropertiesRepository.getString(itemId+".answer");
 			
 			switch (questionType) {
 			case "TorF":
@@ -165,9 +173,10 @@ public class SarasAssessmentPage extends BasePage{
 				throw new Exception("Unrecognized questiontype in assessmentinfo file"+questionType);
 			}
 			
-			if(q<15){
+			if(q<itemIdList.size()){
 				clickNext(itemId);
 			}
+			q++;
 		}
 		return this;
 	}
@@ -188,6 +197,17 @@ public class SarasAssessmentPage extends BasePage{
 
 		default:
 			break;
+		}
+	}
+	
+	public void setItemList(){
+		itemIdList = new ArrayList<String>();
+		log.info("Setting item list");
+		List<WebElement> items = driver.findElements(By.cssSelector(PropertiesRepository.getString("jblearning.navigate.assessments.item")));
+		log.info("Item count: "+items.size());
+		for(WebElement ele : items){
+			log.info("Adding to list: "+ele.getAttribute("id"));
+			itemIdList.add(ele.getAttribute("id"));
 		}
 	}
 }
