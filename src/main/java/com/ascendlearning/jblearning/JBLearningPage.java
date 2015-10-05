@@ -12,7 +12,7 @@ import com.ascendlearning.automation.ui.page.BasePage;
 
 public class JBLearningPage extends BasePage{
 
-	protected JBLearningPage(WebDriver webDriver) {
+	public JBLearningPage(WebDriver webDriver) {
 		super(webDriver);
 		// TODO Auto-generated constructor stub
 	}
